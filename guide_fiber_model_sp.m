@@ -1,93 +1,122 @@
 clc;
 clear all;
 
-%ÎÄ¼şÏÂ´úÂëÒÔÖÆµ¼ÓÃ¹âÏË»·Îª²Î¿¼½øĞĞ½¨Ä£
-%×¢Òâ£º½¨Ä£ÖĞºöÂÔ»»ÔÑ¡¢¿çÔÑµÈ¶¯×÷£¬½«Ã¿ÔÑ¼ò»¯ÎªÔ²»·½øĞĞ´¦Àí£¬´¦Àí·½ÏòÓÉ¹Ç¼Ü¸ß´¦ÍùµÍ´¦
+%æ–‡ä»¶ä¸‹ä»£ç ä»¥åˆ¶å¯¼ç”¨å…‰çº¤ç¯ä¸ºå‚è€ƒè¿›è¡Œå»ºæ¨¡
+%æ³¨æ„ï¼šå»ºæ¨¡ä¸­å¿½ç•¥æ¢åŒã€è·¨åŒç­‰åŠ¨ä½œï¼Œå°†æ¯åŒç®€åŒ–ä¸ºåœ†ç¯è¿›è¡Œå¤„ç†ï¼Œå¤„ç†æ–¹å‘ç”±éª¨æ¶é«˜å¤„å¾€ä½å¤„
 
-%±¾´úÂëÖĞ¹Ø¼ü±äÁ¿°üÀ¨£º
-%                   ÀíÂÛ×î¸ß²ã¼¶£ºlayer
-%                   ²ã¼¶ÔÑÊı£ºN_bot_sat
-%                   ÏËĞ¾¾à¹âÏË»·¹Ç¼ÜºáÖá¾àÀë£ºH_fiber_save
-%                   ¹âÏËÉÏ²ÉÑùÎ»ÖÃ£ºsamp_pos
-%                   ¼äÏ¶¾ØÕó£ºints_mat
-%                   Ö±¾¶¾ØÕó£ºR_mat
-%                   ÏËĞ¾¾à¹âÏË»·¹Ç¼Ü±íÃæ¾àÀë£ºcoc_mat
-%                   µ×²ãÏËĞ¾¾à¹âÏË»·¹Ç¼Ü×óµ×±ß¾àÀë¾ØÕó£ºfiber_core_bot
+%æœ¬ä»£ç ä¸­å…³é”®å˜é‡åŒ…æ‹¬ï¼š
+%                   ç†è®ºæœ€é«˜å±‚çº§ï¼šlayer
+%                   å±‚çº§åŒæ•°ï¼šN_bot_sat
+%                   çº¤èŠ¯è·å…‰çº¤ç¯éª¨æ¶æ¨ªè½´è·ç¦»ï¼šH_fiber_save
+%                   å…‰çº¤ä¸Šé‡‡æ ·ä½ç½®ï¼šsamp_pos
+%                   é—´éš™çŸ©é˜µï¼šints_mat
+%                   ç›´å¾„çŸ©é˜µï¼šR_mat
+%                   çº¤èŠ¯è·å…‰çº¤ç¯éª¨æ¶è¡¨é¢è·ç¦»ï¼šcoc_mat
+%                   åº•å±‚çº¤èŠ¯è·å…‰çº¤ç¯éª¨æ¶å·¦åº•è¾¹è·ç¦»çŸ©é˜µï¼šfiber_core_bot
 
-%ÒÔÏÂÎª»ù±¾²ÎÊı
-%×¢Òâ£º´úÂëÖĞ³¤¶È¡¢Ö±¾¶µÈ²ÎÊıÓ¦¾ù°´ÕÕum´¦Àí;½Ç¶ÈµÈ²ÎÊıÓ¦¾ù°´ÕÕ¶ÈÊı´¦Àí
+%ä»¥ä¸‹ä¸ºåŸºæœ¬å‚æ•°
+%æ³¨æ„ï¼šä»£ç ä¸­é•¿åº¦ã€ç›´å¾„ç­‰å‚æ•°åº”å‡æŒ‰ç…§umå¤„ç†;è§’åº¦ç­‰å‚æ•°åº”å‡æŒ‰ç…§åº¦æ•°å¤„ç†
 
-%¹âÏË»·¹Ç¼Ü²ÎÊı
-L_base = 5e5;%³¤¶È
-R_base = 1.2e5;%µ×²¿Ö±¾¶
-A_base = 2;%ÇãĞ±½Ç¶È
-S_base = L_base/cosd(A_base);%Ğ±±ß³¤¶È
-T_base_left = 1;%mÃ¿²ã¼õÉÙÔÑÊı£¬×¢£º¼õÉÙ·½Ê½Îª£º×ó£º1.5£¬ÓÒ£º2.5
+%å…‰çº¤ç¯éª¨æ¶å‚æ•°
+L_base = 5e5;%é•¿åº¦
+R_base = 1.2e5;%åº•éƒ¨ç›´å¾„
+A_base = 2;%å€¾æ–œè§’åº¦
+S_base = L_base/cosd(A_base);%æ–œè¾¹é•¿åº¦
+T_base_left = 1;%mæ¯å±‚å‡å°‘åŒæ•°ï¼Œæ³¨ï¼šå‡å°‘æ–¹å¼ä¸ºï¼šå·¦ï¼š1.5ï¼Œå³ï¼š2.5
 T_base_right = 2;
 
-%¹âÏË²ÎÊı
-L_fiber = 25e9;%¹âÏË³¤¶È
-R_fiber = 280;%g¹âÏËÀíÏëÖ±¾¶
-E_fiber = R_fiber*0.10;%¹âÏË¼·Ñ¹×î´óÔÊĞí¼·Ñ¹°Ù·Ö±È
-B_fiber = R_fiber*0.10;%¹âÏË»·µ×²ã×îĞ¡¼ä¾à
-conf_int = R_fiber*10/1000;%¹âÏËÖ±¾¶×î´óÆ«²î
-min_fiber = R_fiber*0.12;%¹âÏËÖ®¼ä¼äÏ¶³õ²½¿ØÖÆ
-min_edge = 5;%µ×²ã¹âÏË¾à¹âÏË»·¹Ç¼Üµ×±ß¾àÀë
+%å…‰çº¤å‚æ•°
+L_fiber = 30e9;%å…‰çº¤é•¿åº¦
+R_fiber = 280;%gå…‰çº¤ç†æƒ³ç›´å¾„
+E_fiber = 0*R_fiber*0.10;%å…‰çº¤æŒ¤å‹æœ€å¤§å…è®¸æŒ¤å‹ç™¾åˆ†æ¯”
+B_fiber = R_fiber*0.10;%å…‰çº¤ç¯åº•å±‚æœ€å°é—´è·
+conf_int = R_fiber*10/1000;%å…‰çº¤ç›´å¾„æœ€å¤§åå·®
+min_fiber = R_fiber*0.12;%å…‰çº¤ä¹‹é—´é—´éš™åˆæ­¥æ§åˆ¶
+min_edge = 0;%åº•å±‚å…‰çº¤è·å…‰çº¤ç¯éª¨æ¶åº•è¾¹è·ç¦»
 
-%²ÉÑù²ÎÊı
-N_samp = 4;%Ã¿¸öÔ²»·ÖĞµÄ²ÉÑù¸öÊı
-D_samp = 360/N_samp;%²ÉÑù½Ç¶È£¬Àı£º36´ú±íÔÚÒ»È¦ÖĞ°´ÕÕ10¡ã½øĞĞÒ»¸ö²ÉÑù
+%é‡‡æ ·å‚æ•°
+N_samp = 4;%æ¯ä¸ªåœ†ç¯ä¸­çš„é‡‡æ ·ä¸ªæ•°ï¼Œæ¨¡å‹ä¸­æä¾›4ã€5ã€6ä¸‰ç§é‡‡æ ·ä¸ªæ•°
+D_samp = 360/N_samp;%é‡‡æ ·è§’åº¦ï¼Œä¾‹ï¼š36ä»£è¡¨åœ¨ä¸€åœˆä¸­æŒ‰ç…§10Â°è¿›è¡Œä¸€ä¸ªé‡‡æ ·
 
-%¼ÆËã²ÉÑùÎ»ÖÃ¼°×îºóÒ»²ã¼¶£¨Î´ÂúÔÑ£©¿ØÖÆ²ÎÊı
-samp_pos_control = 1;%ÓÉÓÚ´úÂëÖĞ¼ÆËã²ÉÑùÎ»ÖÃ·Ç³£ºÄÊ±£¬ÓÚÊÇÍ¨¹ı´úÂë¿ØÖÆÊÇ·ñ¼ÆËã²ÉÑùÎ»ÖÃ¡£1¼´¼ÆËã²ÉÑùÎ»ÖÃ£¬0¼´²»¼ÆËã²ÉÑùÎ»ÖÃ
-N_bot_last_control = 0;%1¼´¼ÆËã×îºóÒ»²ã¼¶£¨Î´ÂúÔÑ£©£¬0¼´²»¼ÆËã×îºóÒ»²ã¼¶£¨Î´ÂúÔÑ£©
+%è®¡ç®—é‡‡æ ·ä½ç½®åŠæœ€åä¸€å±‚çº§ï¼ˆæœªæ»¡åŒï¼‰æ§åˆ¶å‚æ•°
+samp_pos_control = 1;%ç”±äºä»£ç ä¸­è®¡ç®—é‡‡æ ·ä½ç½®éå¸¸è€—æ—¶ï¼Œäºæ˜¯é€šè¿‡ä»£ç æ§åˆ¶æ˜¯å¦è®¡ç®—é‡‡æ ·ä½ç½®ã€‚1å³è®¡ç®—é‡‡æ ·ä½ç½®ï¼Œ0å³ä¸è®¡ç®—é‡‡æ ·ä½ç½®
+N_bot_last_control = 0;%1å³è®¡ç®—æœ€åä¸€å±‚çº§ï¼ˆæœªæ»¡åŒï¼‰ï¼Œ0å³ä¸è®¡ç®—æœ€åä¸€å±‚çº§ï¼ˆæœªæ»¡åŒï¼‰
 reconstructed_sg = 0;
 
-%¼ÆËãÀíÏë¹âÏË»·µ×²ã×î´óÔÊĞíÔÑÊı
+%æ­£äº¤éƒ¨åˆ†å æ¯”x%
+rc = 10;
+
+%è¿”å›æ¬¡æ•°è¿‡å¤šæ—¶æ˜¯å¦é‡æ–°é€‰æ‹©åº•å±‚åŒæ•°,{ 0 }è¡¨ç¤ºç«‹å³ç»ˆæ­¢è®¡ç®—,{ 1 }è¡¨ç¤ºé‡æ–°é€‰æ‹©åŒæ•°è¿›è¡Œè®¡ç®—ï¼Œ{ 2 }è¡¨ç¤ºç»§ç»­è¿›è¡Œè®¡ç®—
+restart_model = 2;
+
+%è¿”å›æ¬¡æ•°é™åˆ¶
+error_num = 20;
+
+%è§£ç®—æ¬¡æ•°
+stop_num = 1;
+
+%å†æ¬¡è¯»å–ä¸Šæ¬¡è¿è¡Œä¿å­˜çš„ç›´å¾„æ•°æ®
+re_read = 0;
+
+%è®¡ç®—ç†æƒ³å…‰çº¤ç¯åº•å±‚æœ€å¤§å…è®¸åŒæ•°
 N_bot_max_temp = Numofbot(S_base, N_samp, R_fiber, B_fiber);
 
-%×¢Òâ£ºÓÉÓÚN_bot_max_tempÊÇÀíÏëÇé¿öÏÂµÄ×î´óµ×²ãÔÑÊı£¬ÓÉÓÚ¹âÏËÖ±¾¶´æÔÚÎó²î£¬ËùÒÔĞèÒª¿¼ÂÇÒ»¶¨·¶Î§ÄÚµÄÔÑÊıÎó²î
-for N_bot = N_bot_max_temp-round(N_bot_max_temp/100):N_bot_max_temp-round(N_bot_max_temp/100)
+NUM_N = 1 + 2*R_fiber/E_fiber;
+
+%æ³¨æ„ï¼šç”±äºN_bot_max_tempæ˜¯ç†æƒ³æƒ…å†µä¸‹çš„æœ€å¤§åº•å±‚åŒæ•°ï¼Œç”±äºå…‰çº¤ç›´å¾„å­˜åœ¨è¯¯å·®ï¼Œæ‰€ä»¥éœ€è¦è€ƒè™‘ä¸€å®šèŒƒå›´å†…çš„åŒæ•°è¯¯å·®
+for N_bot = N_bot_max_temp - round(N_bot_max_temp/75):round(N_bot_max_temp/100):N_bot_max_temp + round(N_bot_max_temp/75)
     
-    %È·¶¨µ×²ãÔÑÊıºó£¬ºóĞøÃ¿²ã¼¶ÔÑÊı¶¼ÊÇÒÑÖªÊı£¬ËùÒÔ°´ÕÕ¸Ãµ×²ãÔÑÊı¼ÌĞø½øĞĞ¼ÆËã
+    %ç¡®å®šåº•å±‚åŒæ•°åï¼Œåç»­æ¯å±‚çº§åŒæ•°éƒ½æ˜¯å·²çŸ¥æ•°ï¼Œæ‰€ä»¥æŒ‰ç…§è¯¥åº•å±‚åŒæ•°ç»§ç»­è¿›è¡Œè®¡ç®—
     
-    %¼ÆËãÀíÏë¹âÏË»·µÄ²ÉÑùÎ»ÖÃÍ¬Ê±¼ÆËã¹âÏË»·×î¸ß²ã¼¶
-    %???ÖØµã»·½Ú???
-    %×¢Òâ£º¼ÆËã³öµÄ×îºó²ã¼¶ÓÉÓÚ»áµ¼ÖÂËùÊ¹ÓÃµÄ¹âÏË³¤¶È³¬¹ıÔ¤¶¨Öµ£¬ËùÒÔ¼ÆËã³öµÄ²ã¼¶ĞèÒª¼õ1£¬
-    %      ²¢ÇÒÓÉÓÚ×îºóÒ»²ã¼¶²»Ò»¶¨ÂúÔÑ£¬ËùÒÔĞèÒªµ¥¶À¿¼ÂÇ×îºóÒ»²ã¼¶
-    %      Áí£ºÒÔÏÂ¼ÆËã²ÉÑùÎ»ÖÃµÄ´úÂëÔÚÊµ¼ÊÊ¹ÓÃÖĞ¼«ÆäºÄÊ±£¬ÔÚ²âÊÔÊ±£¬Ó¦ÊÊµ±ĞŞ¸Ä²ÎÊı£¬¼õÉÙÔËĞĞÊ±¼ä
-    %      ÔËĞĞÊ±¼ä¾ÃµÄÔ­ÒòÓ¦ÊÇĞèÒª¼ÆËã¹âÏËÉÏÃ¿¸ö²ÉÑùµã¾à³õÊ¼Î»ÖÃµÄÎ»ÖÃ£¬µ±²ÉÑùµãÊıÁ¿¶à¡¢¹âÏË³¤Ê±£¬ÔËËãÁ¿´ó£¬ºÄÊ±¾Ã
-    S_base_rem = S_base - N_bot*R_fiber - (N_bot - 1)*B_fiber;%³ıÈ¥¹âÏËÖ±¾¶ÒÔ¼°±ê×¼¼äÏ¶Íâ£¬µ×²ãÊ£Óà³¤¶È
-    ints_bot = B_fiber + S_base_rem/(N_bot - 1);%ÀíÏëÇé¿öÏÂµÄµ×²ã¼äÏ¶
-    L_fiber_sat = 0;%Í³¼ÆÒÑÊ¹ÓÃ¹âÏË³¤¶È
-    L_fiber_sat_save = [];%´æ´¢Ã¿²ãÊ¹ÓÃµÄ¹âÏË³¤¶È
-    layer_temp = 1;%²ã¼¶
-    N_bot_sat = [];%´æ´¢Ã¿¸ö²ã¼¶µÄÔÑÊı
-    H_fiber_save = {};%´æ´¢¹âÏË½ØÃæÔ²ĞÄ¾àÀë¹Ç¼ÜºáÖá¸ß¶È
-    H_decr = sqrt(R_fiber^2 - ((R_fiber + ints_bot)/2)^2);%Á½ÏàÁÚ²ã¼¶Ö®¼äµÄ¹âÏËºá½ØÃæÔ²ĞÄ¸ß¶È²î
+    %è®¡ç®—ç†æƒ³å…‰çº¤ç¯çš„é‡‡æ ·ä½ç½®åŒæ—¶è®¡ç®—å…‰çº¤ç¯æœ€é«˜å±‚çº§
+    %???é‡ç‚¹ç¯èŠ‚???
+    %æ³¨æ„ï¼šè®¡ç®—å‡ºçš„æœ€åå±‚çº§ç”±äºä¼šå¯¼è‡´æ‰€ä½¿ç”¨çš„å…‰çº¤é•¿åº¦è¶…è¿‡é¢„å®šå€¼ï¼Œæ‰€ä»¥è®¡ç®—å‡ºçš„å±‚çº§éœ€è¦å‡1ï¼Œ
+    %      å¹¶ä¸”ç”±äºæœ€åä¸€å±‚çº§ä¸ä¸€å®šæ»¡åŒï¼Œæ‰€ä»¥éœ€è¦å•ç‹¬è€ƒè™‘æœ€åä¸€å±‚çº§
+    %      å¦ï¼šä»¥ä¸‹è®¡ç®—é‡‡æ ·ä½ç½®çš„ä»£ç åœ¨å®é™…ä½¿ç”¨ä¸­æå…¶è€—æ—¶ï¼Œåœ¨æµ‹è¯•æ—¶ï¼Œåº”é€‚å½“ä¿®æ”¹å‚æ•°ï¼Œå‡å°‘è¿è¡Œæ—¶é—´
+    %      è¿è¡Œæ—¶é—´ä¹…çš„åŸå› åº”æ˜¯éœ€è¦è®¡ç®—å…‰çº¤ä¸Šæ¯ä¸ªé‡‡æ ·ç‚¹è·åˆå§‹ä½ç½®çš„ä½ç½®ï¼Œå½“é‡‡æ ·ç‚¹æ•°é‡å¤šã€å…‰çº¤é•¿æ—¶ï¼Œè¿ç®—é‡å¤§ï¼Œè€—æ—¶ä¹…
+    S_base_rem = S_base - N_bot*R_fiber - (N_bot - 1)*B_fiber;%é™¤å»å…‰çº¤ç›´å¾„ä»¥åŠæ ‡å‡†é—´éš™å¤–ï¼Œåº•å±‚å‰©ä½™é•¿åº¦
+    ints_bot = B_fiber + S_base_rem/(N_bot - 1);%ç†æƒ³æƒ…å†µä¸‹çš„åº•å±‚é—´éš™
+    L_fiber_sat = 0;%ç»Ÿè®¡å·²ä½¿ç”¨å…‰çº¤é•¿åº¦
+    L_fiber_sat_save = [];%å­˜å‚¨æ¯å±‚ä½¿ç”¨çš„å…‰çº¤é•¿åº¦
+    layer_temp = 1;%å±‚çº§
+    N_bot_sat = [];%å­˜å‚¨æ¯ä¸ªå±‚çº§çš„åŒæ•°
+    H_fiber_save = {};%å­˜å‚¨å…‰çº¤æˆªé¢åœ†å¿ƒè·ç¦»éª¨æ¶æ¨ªè½´é«˜åº¦
+    H_decr = sqrt(R_fiber^2 - ((R_fiber + ints_bot)/2)^2);%ä¸¤ç›¸é‚»å±‚çº§ä¹‹é—´çš„å…‰çº¤æ¨ªæˆªé¢åœ†å¿ƒé«˜åº¦å·®
+    
+    %è·¨çº¿ç®€åŒ–è¡¥å¿é•¿åº¦åˆ†å¸ƒ
+    bc = [];
+    %å¾ªç¯è·³å‡ºåˆ¤æ–­
+    jump_jump = 0;
+    
     while L_fiber_sat <= L_fiber
         H_fiber_layer = [];
-        N_bot_idea = N_bot - (T_base_left + T_base_right + 1)*(layer_temp-1);%µ±Ç°²ã¼¶ÏÂµÄÔÑÊı
+        N_bot_idea = N_bot - (T_base_left + T_base_right + 1)*(layer_temp-1);%å½“å‰å±‚çº§ä¸‹çš„åŒæ•°
         N_bot_sat = [N_bot_sat;N_bot_idea];
         if N_bot_idea <= 0
             break;
-            disp('²ÎÊıÊäÈë´íÎó£¡?');
+            disp('å‚æ•°è¾“å…¥é”™è¯¯ï¼?');
         end
         for i = 1:N_bot_idea
             H_fiber_layer_temp = R_base/2 - ((R_fiber/2)*sind(A_base) + (i - 1)*(R_fiber + ints_bot)*sind(A_base)) +...
                 (R_fiber/2 + H_decr*(layer_temp - 1))*cosd(A_base) -...
                 sind(A_base)*((layer_temp - 1)*(T_base_left*(R_fiber + ints_bot) + (R_fiber + ints_bot)/2));...
-                %µ±Ç°ÔÑ¾àÀë¹Ç¼ÜºáÖá¸ß¶È
+                %å½“å‰åŒè·ç¦»éª¨æ¶æ¨ªè½´é«˜åº¦
             H_fiber_layer = [H_fiber_layer, H_fiber_layer_temp];
         end
         H_fiber_save{layer_temp,1} = H_fiber_layer;
         
-        %Í³¼Æµ±Ç°²ã¼¶ËùÓÃ¹âÏË³¤¶È
+        
+        %ç»Ÿè®¡å½“å‰å±‚çº§æ‰€ç”¨å…‰çº¤é•¿åº¦
         if mod(layer_temp,2)==1
-            L_fiber_layer_sat = sum(2*pi*H_fiber_layer)+R_fiber*T_base_right;
+            l1 = rc*H_fiber_layer(end)*pi/180;
+            l2 = sqrt((l1)^2+(R_fiber/2*sqrt(3))^2+((T_base_right+0.5)*(R_fiber+ints_bot))^2);
+            L_fiber_layer_sat = sum(2*pi*H_fiber_layer)+R_fiber*T_base_right+l2-l1;
         else
-            L_fiber_layer_sat = sum(2*pi*H_fiber_layer)+R_fiber*T_base_left;
+            l1 = rc*H_fiber_layer(1)*pi/180;
+            l2 = sqrt((l1)^2+(R_fiber/2*sqrt(3))^2+((T_base_left+0.5)*(R_fiber+ints_bot))^2);
+            L_fiber_layer_sat = sum(2*pi*H_fiber_layer)+R_fiber*T_base_left+l2-l1;
         end
+        bc = [bc;l2-l1];
         L_fiber_sat_save = [L_fiber_sat_save;L_fiber_layer_sat];
         L_fiber_sat = L_fiber_sat + L_fiber_layer_sat;
         
@@ -95,44 +124,40 @@ for N_bot = N_bot_max_temp-round(N_bot_max_temp/100):N_bot_max_temp-round(N_bot_
         
     end
     N_bot_sat = N_bot_sat(1:end - 1);
-    layer = layer_temp - 1;%ÂúÔÑ²ã¼¶ÊıÎªlayer_temp - 2
+    layer = layer_temp - 1;%æ»¡åŒå±‚çº§æ•°ä¸ºlayer_temp - 2
     
-    %¼ÆËãµ±Ç°²ã¼¶µÄ¹âÏË¾İ³õÊ¼Î»ÖÃµÄ²ÉÑù¾àÀë
-    samp_pos_temp = [0];%²ÉÑùµã¼ä¾àÍ³¼Æ
-    samp_pos = [0];%²ÉÑùµãÎ»ÖÃÍ³¼Æ
+    %è®¡ç®—å½“å‰å±‚çº§çš„å…‰çº¤æ®åˆå§‹ä½ç½®çš„é‡‡æ ·è·ç¦»
+    samp_pos_temp = [0];%é‡‡æ ·ç‚¹é—´è·ç»Ÿè®¡
+    samp_pos = [0];%é‡‡æ ·ç‚¹ä½ç½®ç»Ÿè®¡
     
-    %¿¼ÂÇÇ°layer-1¸öÂúÔÑ²ã¼¶
+    %è€ƒè™‘å‰layer-1ä¸ªæ»¡åŒå±‚çº§
     [samp_pos_temp, samp_pos] = Sampling_position_cal(samp_pos_control, layer, H_fiber_save,...
         samp_pos_temp, samp_pos, N_samp, reconstructed_sg);
     
     for mm=1:length(N_bot_sat)-1
-        if mod(mm,2)==1
-            samp_pos(sum(N_bot_sat(1:mm))*4+1:end)=samp_pos(sum(N_bot_sat(1:mm))*4:end)+R_fiber*T_base_right;
-        else
-            samp_pos(sum(N_bot_sat(1:mm))*4+1:end)=samp_pos(sum(N_bot_sat(1:mm))*4:end)+R_fiber*T_base_left;
-        end
+        samp_pos(sum(N_bot_sat(1:mm))*N_samp+1:end)=samp_pos(sum(N_bot_sat(1:mm))*N_samp+1:end)+bc(mm);
     end
     
-    L_fiber_use = sum(L_fiber_sat_save(1:end-1));%ÂúÔÑ²ã¼¶ËùÓÃ¹âÏË³¤¶È
+    L_fiber_use = sum(L_fiber_sat_save(1:end-1));%æ»¡åŒå±‚çº§æ‰€ç”¨å…‰çº¤é•¿åº¦
     
     if N_bot_last_control == 1
-        %¿¼ÂÇ×îºóÒ»²ã¼¶
+        %è€ƒè™‘æœ€åä¸€å±‚çº§
         
-        L_fiber_rme = L_fiber - L_fiber_use;%×îºóÒ»²ã¼¶¹âÏË³¤¶È
-        %×îºóÒ»²ã¼¶¿ÉÈÆÔÑÊı
+        L_fiber_rme = L_fiber - L_fiber_use;%æœ€åä¸€å±‚çº§å…‰çº¤é•¿åº¦
+        %æœ€åä¸€å±‚çº§å¯ç»•åŒæ•°
         H_fiber_layer_last = [];
         L_fiber_layer_last_sat = 0;
         i = 1;
         while L_fiber_layer_last_sat <= L_fiber_rme
-            %ÅĞ¶Ï×îºóÒ»²ã¼¶ÊıÆæÅ¼
-            %×¢Òâ£º²ã¼¶µÄÆæÅ¼¾ö¶¨µÄ¹âÏË´Ó¸ßÍùµÍ»¹ÊÇ´ÓµÍÍù¸ßÈÆ£¬ËùÒÔĞèÒª·Ö±ğÅĞ¶Ï¼ÆËã
+            %åˆ¤æ–­æœ€åä¸€å±‚çº§æ•°å¥‡å¶
+            %æ³¨æ„ï¼šå±‚çº§çš„å¥‡å¶å†³å®šçš„å…‰çº¤ä»é«˜å¾€ä½è¿˜æ˜¯ä»ä½å¾€é«˜ç»•ï¼Œæ‰€ä»¥éœ€è¦åˆ†åˆ«åˆ¤æ–­è®¡ç®—
             if mod(layer,2) == 1
-                %µ±Ç°ÔÑ¾àÀë¹Ç¼ÜºáÖá¸ß¶È
+                %å½“å‰åŒè·ç¦»éª¨æ¶æ¨ªè½´é«˜åº¦
                 H_fiber_layer_temp_last = R_base/2 - ((R_fiber/2)*sind(A_base) + (i - 1)*(R_fiber + ints_bot)*sind(A_base)) +...
                     (R_fiber/2 + H_decr*(layer - 1))*cosd(A_base) -...
                     sind(A_base)*((layer - 1)*(T_base_left*(R_fiber + ints_bot) + (R_fiber + ints_bot)/2));
             else
-                %µ±Ç°ÔÑ¾àÀë¹Ç¼ÜºáÖá¸ß¶È
+                %å½“å‰åŒè·ç¦»éª¨æ¶æ¨ªè½´é«˜åº¦
                 H_fiber_layer_temp_last = R_base/2 - L_base*tand(A_base) +...
                     ((R_fiber/2)*sind(A_base) + (i - 1)*(R_fiber + ints_bot)*sind(A_base)) +...
                     (R_fiber/2 + H_decr*(layer - 1))*cosd(A_base) +...
@@ -142,97 +167,154 @@ for N_bot = N_bot_max_temp-round(N_bot_max_temp/100):N_bot_max_temp-round(N_bot_
             L_fiber_layer_last_sat = L_fiber_layer_last_sat + H_fiber_layer_temp_last*2*pi;
             i = i + 1;
         end
-        N_bot_idea = i - 2;%×îºóÒ»ÔÑÎ´ÂúÔÑ£¬ÔÚ¸Ã¼ÆËãÖĞ¿É²»ÓèÒÔ¿¼ÂÇ
+        N_bot_idea = i - 2;%æœ€åä¸€åŒæœªæ»¡åŒï¼Œåœ¨è¯¥è®¡ç®—ä¸­å¯ä¸äºˆä»¥è€ƒè™‘
         N_bot_sat = [N_bot_sat;N_bot_idea];
         
-        %»ñµÃ×îºóÒ»²ã¼¶µÄ²ÉÑùÎ»ÖÃ
+        %è·å¾—æœ€åä¸€å±‚çº§çš„é‡‡æ ·ä½ç½®
         if samp_pos_control == 1
             if mod(layer,2) == 1
-                S_fiber_layer_last = 2*pi*H_fiber_layer_last(1:end - 1)/N_samp;%Ã¿ÔÑµÄ²ÉÑù¼ä¾à
+                S_fiber_layer_last = 2*pi*H_fiber_layer_last(1:end - 1)/N_samp;%æ¯åŒçš„é‡‡æ ·é—´è·
             else
-                S_fiber_layer_last = 2*pi*fliplr(H_fiber_layer_last(1:end - 1))/N_samp;%Ã¿ÔÑµÄ²ÉÑù¼ä¾à
+                S_fiber_layer_last = 2*pi*fliplr(H_fiber_layer_last(1:end - 1))/N_samp;%æ¯åŒçš„é‡‡æ ·é—´è·
             end
             for m = 1:length(S_fiber_layer_last)
                 for n = 1:N_samp
-                    samp_pos = [samp_pos, samp_pos(end) + S_fiber_layer_last(m)];%»ñµÃ²ÉÑùÎ»ÖÃ
+                    samp_pos = [samp_pos, samp_pos(end) + S_fiber_layer_last(m)];%è·å¾—é‡‡æ ·ä½ç½®
                 end
             end
         end
     end
     
-    %ÓÉÒÔÉÏ´úÂë£¬ÒÑÖª²ÉÑùÎ»ÖÃ£¬Ôò¿É»ñµÃ¹âÏËÖ±¾¶¾ØÕó
-    %×¢Òâ£ºÓÉÓÚ¸ÃÖ±¾¶¾ØÕóÊÇÓÉÀíÏëÇé¿ö¼ÆËãµÃµ½µÄ£¬¶øÊµ¼ÊÇé¿öÏÂ£¬²ÉÑùÎ»ÖÃÊÇ´æÔÚÆ«²îµÄ
-    %      ËùÒÔÊµ¼ÊÖĞ½«¹âÏËÖ±¾¶°´Ò»¶ÎÒ»¶Î´¦Àí£¬¿É¼õÉÙÒ»¶¨Îó²î
-    %      ÔÚ¸Ã´úÂëÖĞ£¬ÓÉÓÚÃ»ÓĞÊµ¼ÊÊı¾İ£¬½«Í¨¹ıËæ»úÉú³ÉÀ´»ñµÃÖ±¾¶¾ØÕó
+    %ç”±ä»¥ä¸Šä»£ç ï¼Œå·²çŸ¥é‡‡æ ·ä½ç½®ï¼Œåˆ™å¯è·å¾—å…‰çº¤ç›´å¾„çŸ©é˜µ
+    %æ³¨æ„ï¼šç”±äºè¯¥ç›´å¾„çŸ©é˜µæ˜¯ç”±ç†æƒ³æƒ…å†µè®¡ç®—å¾—åˆ°çš„ï¼Œè€Œå®é™…æƒ…å†µä¸‹ï¼Œé‡‡æ ·ä½ç½®æ˜¯å­˜åœ¨åå·®çš„
+    %      æ‰€ä»¥å®é™…ä¸­å°†å…‰çº¤ç›´å¾„æŒ‰ä¸€æ®µä¸€æ®µå¤„ç†ï¼Œå¯å‡å°‘ä¸€å®šè¯¯å·®
+    %      åœ¨è¯¥ä»£ç ä¸­ï¼Œç”±äºæ²¡æœ‰å®é™…æ•°æ®ï¼Œå°†é€šè¿‡éšæœºç”Ÿæˆæ¥è·å¾—ç›´å¾„çŸ©é˜µ
     
-    %Éú³ÉÖ±¾¶¾ØÕó£¬·ÖÎªÁ½ÖÖÄ£Ê½£¬Ò»¡¢Ã¿²ã¼¶Ã¿ÔÑ¹âÏËÖ±¾¶ÏàÍ¬£¬Ëæ»úÉú³É£»¶ş¡¢Ã¿¸ö²ÉÑùµãµÄÖ±¾¶ÍêÈ«Ëæ»úÉú³É£»
-    %                          Èı¡¢Ô­ÀíÍ¬Ò»£¬»ñÈ¡¹âÏËÉÏÒ»ĞĞ²ÉÑùµãÎ»ÖÃ£¬Ö±¹ÛĞÔ£»ËÄ¡¢Ô­ÀíÍ¬¶ş¼°Èı
-    diam_mat_model = 3;%Ä£Ê½¿ØÖÆ
-    diam_mat = diameter_of_matrix(diam_mat_model, N_bot_sat, N_samp, layer, conf_int, R_fiber, samp_pos_temp);%»ñµÃÖ±¾¶¾ØÕó
+    %ç”Ÿæˆç›´å¾„çŸ©é˜µï¼Œåˆ†ä¸ºä¸¤ç§æ¨¡å¼ï¼Œä¸€ã€æ¯å±‚çº§æ¯åŒå…‰çº¤ç›´å¾„ç›¸åŒï¼Œéšæœºç”Ÿæˆï¼›äºŒã€æ¯ä¸ªé‡‡æ ·ç‚¹çš„ç›´å¾„å®Œå…¨éšæœºç”Ÿæˆï¼›
+    %                          ä¸‰ã€åŸç†åŒä¸€ï¼Œè·å–å…‰çº¤ä¸Šä¸€è¡Œé‡‡æ ·ç‚¹ä½ç½®ï¼Œç›´è§‚æ€§ï¼›å››ã€åŸç†åŒäºŒåŠä¸‰
+    
+    if re_read == 1
+        disp('è¯»å–ä¸Šæ¬¡è¿è¡Œçš„ç›´å¾„çŸ©é˜µ');
+        load('last_diam.mat'); %å†æ¬¡è¯»å…¥ä¸Šæ¬¡è¿è¡Œçš„ç›´å¾„çŸ©é˜µ
+    else
+        disp('è‡ªè¡Œç”Ÿæˆç›´å¾„çŸ©é˜µ');
+        diam_mat_model = 3;%æ¨¡å¼æ§åˆ¶
+        diam_mat = diameter_of_matrix(diam_mat_model, N_bot_sat, N_samp, layer, conf_int, R_fiber, samp_pos_temp);%è·å¾—ç›´å¾„çŸ©é˜µ
+    end
+
+    
+    %è·å¾—ç›´å¾„çŸ©é˜µä¹‹åï¼Œéœ€è¦å†é€šè¿‡è·å¾—é—´éš™çŸ©é˜µæ¥ä»åº•å±‚å‘é«˜å±‚è¿›è¡Œæ¨ç®—ï¼Œåˆ¤æ–­å„å±‚çº§çš„å…‰çº¤çš„ä½ç½®æ˜¯å¦æ»¡è¶³è¦æ±‚
+    sat = 0;%åˆ¤æ–­ç»“æœæ˜¯å¦æ»¡è¶³è¦æ±‚
+    ints_mat = {};%é—´éš™çŸ©é˜µï¼Œå­˜å‚¨æ¯ä¸€å±‚çº§é—´éš™ç”¨
     
     
-    %»ñµÃÖ±¾¶¾ØÕóÖ®ºó£¬ĞèÒªÔÙÍ¨¹ı»ñµÃ¼äÏ¶¾ØÕóÀ´´Óµ×²ãÏò¸ß²ã½øĞĞÍÆËã£¬ÅĞ¶Ï¸÷²ã¼¶µÄ¹âÏËµÄÎ»ÖÃÊÇ·ñÂú×ãÒªÇó
-    sat = 0;%ÅĞ¶Ï½á¹ûÊÇ·ñÂú×ãÒªÇó
-    ints_mat = {};%¼äÏ¶¾ØÕó£¬´æ´¢Ã¿Ò»²ã¼¶¼äÏ¶ÓÃ
-    
-    
-    error_level = [];%ÍÆËãÖĞ±¨´í²ã¼¶¼ÇÂ¼
+    error_level = [];%æ¨ç®—ä¸­æŠ¥é”™å±‚çº§è®°å½•
     ints_temp_save = [];
+    ints_neg_save = [];%è®°å½•å±‚çº§æ¨ç®—ä¸­çš„è´Ÿé—´éš™
     while  sat == 0
-        %ÓÉÓÚÔÚÊµ¼Ê²øÈÆ¹ı³ÌÖĞ£¬Ã¿¸öÎ»ÖÃµÄÏ¸½ÚÊÇ²»¿ÉÖª£¬Ò²ÎŞ·¨»ñÖªÓ¦µ±ÊÊÓÃÔõÑùµÄµ×²ã¼äÏ¶²ÅÄÜ»ñµÃÅÅ²¼Á¼ºÃµÄ¹âÏË»·...
-        %ËùÒÔÄ¿Ç°½öÄÜ¹»Í¨¹ıËæ»úµÄ·½Ê½£¬À´»ñµÃµ×²ãµÄ¼äÏ¶¾ØÕó£¬´Ó¶øÀ´ÍÆÑİ¸ß²ã¼ÇµÄ¼äÏ¶¾ØÕó
-        %×¢Òâ£ºÊµ¼ÊÖĞÎŞ·¨Ê¹Á½¸ùÏàÁÚ¹âÏËµÄ¼ä¾à±£Ö¤µ×²ã¼äÏ¶¾ØÕó£¬ËùÒÔµ×²ãÓ¦¶îÍâ¿¼ÂÇ¹âÏËÏËĞ¾¼äµÄ¼ä¾à
+        if length(error_level) > error_num
+            if restart_model == 1
+                disp('è¿”å›æ¬¡æ•°è¿‡å¤šï¼é‡æ–°é€‰æ‹©åº•å±‚åŒæ•°ï¼')
+                break;
+            else if restart_model == 0
+                error('è¿”å›æ¬¡æ•°è¿‡å¤šï¼ç»ˆæ­¢è¿è¡Œï¼');
+                else
+                    disp('ç»§ç»­è®¡ç®—ï¼');
+                end
+            end
+        end
+        %ç”±äºåœ¨å®é™…ç¼ ç»•è¿‡ç¨‹ä¸­ï¼Œæ¯ä¸ªä½ç½®çš„ç»†èŠ‚æ˜¯ä¸å¯çŸ¥ï¼Œä¹Ÿæ— æ³•è·çŸ¥åº”å½“é€‚ç”¨æ€æ ·çš„åº•å±‚é—´éš™æ‰èƒ½è·å¾—æ’å¸ƒè‰¯å¥½çš„å…‰çº¤ç¯...
+        %æ‰€ä»¥ç›®å‰ä»…èƒ½å¤Ÿé€šè¿‡éšæœºçš„æ–¹å¼ï¼Œæ¥è·å¾—åº•å±‚çš„é—´éš™çŸ©é˜µï¼Œä»è€Œæ¥æ¨æ¼”é«˜å±‚è®°çš„é—´éš™çŸ©é˜µ
+        %æ³¨æ„ï¼šå®é™…ä¸­æ— æ³•ä½¿ä¸¤æ ¹ç›¸é‚»å…‰çº¤çš„é—´è·ä¿è¯åº•å±‚é—´éš™çŸ©é˜µï¼Œæ‰€ä»¥åº•å±‚åº”é¢å¤–è€ƒè™‘å…‰çº¤çº¤èŠ¯é—´çš„é—´è·
         
         
-        %×¢Òâ£ºÔÚÖÆµ¼¹âÏËÄ£Ê½ÏÂ£¬ÓÉÓÚÃ¿¸ö²ã¼¶µÄ¹âÏË²»ĞèÒª±ØĞë½ôÌù¹âÏË¹Ç¼ÜµÄµ×±ß£¬ËùÒÔ¿ÉÒÔ¿¼ÂÇÔÚµ×²ã¼äÏ¶¾ØÕóÒÔ¼°µ×²ãÏËĞ¾Î»ÖÃ¾ØÕó...
-        %      µÄÁ½±ß¸÷Ôö¼Ó5um»òÊÊµ±³¤¶ÈµÄÈßÓàÖµ£»¶øÔÚËÄ¼¶¶Ô³Æ¹âÏËÏÂ£¬ÓÉÓÚ¹âÏË»·µÄ²¿·Ö²ã¼¶±ØĞë½ôÌù¹âÏË»·¹Ç¼ÜµÄµ×±ß£¬ËùÒÔ...
-        %      µ×²ã¼äÏ¶¾ØÕóÒÔ¼°µ×²ãÏËĞ¾Î»ÖÃ¾ØÕóµÄÁ½±ßÖ»ÄÜÉèÖÃÎª0
+        %æ³¨æ„ï¼šåœ¨åˆ¶å¯¼å…‰çº¤æ¨¡å¼ä¸‹ï¼Œç”±äºæ¯ä¸ªå±‚çº§çš„å…‰çº¤ä¸éœ€è¦å¿…é¡»ç´§è´´å…‰çº¤éª¨æ¶çš„åº•è¾¹ï¼Œæ‰€ä»¥å¯ä»¥è€ƒè™‘åœ¨åº•å±‚é—´éš™çŸ©é˜µä»¥åŠåº•å±‚çº¤èŠ¯ä½ç½®çŸ©é˜µ...
+        %      çš„ä¸¤è¾¹å„å¢åŠ 5umæˆ–é€‚å½“é•¿åº¦çš„å†—ä½™å€¼ï¼›è€Œåœ¨å››çº§å¯¹ç§°å…‰çº¤ä¸‹ï¼Œç”±äºå…‰çº¤ç¯çš„éƒ¨åˆ†å±‚çº§å¿…é¡»ç´§è´´å…‰çº¤ç¯éª¨æ¶çš„åº•è¾¹ï¼Œæ‰€ä»¥...
+        %      åº•å±‚é—´éš™çŸ©é˜µä»¥åŠåº•å±‚çº¤èŠ¯ä½ç½®çŸ©é˜µçš„ä¸¤è¾¹åªèƒ½è®¾ç½®ä¸º0
         
         
-        %»ñµÃµ×²ãÏËĞ¾Î»ÖÃ¾ØÕóÒÔ¼°µ×²ã¼äÏ¶¾ØÕó
+        %è·å¾—åº•å±‚çº¤èŠ¯ä½ç½®çŸ©é˜µä»¥åŠåº•å±‚é—´éš™çŸ©é˜µ
         N_bot_temp = N_bot_sat(1);
         
-        %×¢Òâ£º¸Ã´úÂëÖĞÓëÆäÓàÁ½¸ö´úÂëµÄ»ñÈ¡µ×²ãÖ±¾¶¾ØÕó·½Ê½²»Í¬£¬ÊÇÒòÎª¸Ã´úÂëĞèÒªÖØµã¿¼ÂÇ±£³Ö¹âÏË»·µÄ×¶ĞÎĞÎÌ¬£¬
-        %      ¿ÉÄÜ»á´æÔÚËæ×Å²ã¼¶µÄÉÏÉı£¬ÔÑÊı²»Ò»¶¨°´ÕÕÇ°´úÂëÖĞ¹æ¶¨µÄÏàÁÚ²ã¼¶±ä»¯T_baseµÄÔÑÊıµÄ¹æ¶¨£¬ËùÒÔĞèÒªÍ¨¹ıÏÂÊö·½Ê½À´»ñµÃµ×²ãÖ±¾¶¾ØÕó
+        %æ³¨æ„ï¼šè¯¥ä»£ç ä¸­ä¸å…¶ä½™ä¸¤ä¸ªä»£ç çš„è·å–åº•å±‚ç›´å¾„çŸ©é˜µæ–¹å¼ä¸åŒï¼Œæ˜¯å› ä¸ºè¯¥ä»£ç éœ€è¦é‡ç‚¹è€ƒè™‘ä¿æŒå…‰çº¤ç¯çš„é”¥å½¢å½¢æ€ï¼Œ
+        %      å¯èƒ½ä¼šå­˜åœ¨éšç€å±‚çº§çš„ä¸Šå‡ï¼ŒåŒæ•°ä¸ä¸€å®šæŒ‰ç…§å‰ä»£ç ä¸­è§„å®šçš„ç›¸é‚»å±‚çº§å˜åŒ–T_baseçš„åŒæ•°çš„è§„å®šï¼Œæ‰€ä»¥éœ€è¦é€šè¿‡ä¸‹è¿°æ–¹å¼æ¥è·å¾—åº•å±‚ç›´å¾„çŸ©é˜µ
         diam_mat_bot = diam_mat(:,1:N_bot_temp);
         
-        %³ıÈ¥¹âÏË»·Ö±¾¶ºÍ±ØÒª¹âÏË¼ä¾àÍâ£¬Ê£ÓàµÄ×îĞ¡³¤¶È
-        ints_mat_bot_rem = S_base - max(sum(diam_mat_bot, 2)) - (N_bot_temp - 1)*B_fiber -10;%¼õ10umÊÇ¿¼ÂÇµ½ÈßÓà
-        [~,L_fiber_bot_max]= max(sum(diam_mat_bot, 2));
-        
-        %¼ÆËã²ÉÑùÎ»ÖÃÏÂÃ¿ĞĞ×îĞ¡Ê£Óà³¤¶ÈÏÂµÄ¼äÏ¶·ÖÅä
-        disp('¼ÆËã²ÉÑùÎ»ÖÃÏÂÃ¿ĞĞ×îĞ¡Ê£Óà³¤¶ÈÏÂµÄ¼äÏ¶·ÖÅä');
-        ints_temp = Minimum_clearance_distribution(N_bot_temp, min_fiber, B_fiber, ints_mat_bot_rem, min_edge);
-        ints_temp_save = [ints_temp_save;ints_temp];
-        
-        %¼ÆËãµ×²ãÏËĞ¾Î»ÖÃ¾ØÕó
-        fiber_core_bot = Bottom_core_matrix(diam_mat_bot, L_fiber_bot_max, ints_temp, N_bot_temp);
-        
-        %¼ÆËãµ×²ã¼äÏ¶¾ØÕó
-        ints_mat_bot = Bottom_clearance_matrix(N_samp, N_bot_temp, fiber_core_bot, diam_mat_bot, S_base);
-        
+        if jump_jump == 0
+            %é™¤å»å…‰çº¤ç¯ç›´å¾„å’Œå¿…è¦å…‰çº¤é—´è·å¤–ï¼Œå‰©ä½™çš„æœ€å°é•¿åº¦
+            ints_mat_bot_rem = S_base - max(sum(diam_mat_bot, 2)) - (N_bot_temp - 1)*B_fiber -min_edge*2;%å‡10umæ˜¯è€ƒè™‘åˆ°å†—ä½™
+            [~,L_fiber_bot_max]= max(sum(diam_mat_bot, 2));
+            
+            %è®¡ç®—é‡‡æ ·ä½ç½®ä¸‹æ¯è¡Œæœ€å°å‰©ä½™é•¿åº¦ä¸‹çš„é—´éš™åˆ†é…
+            disp('è®¡ç®—é‡‡æ ·ä½ç½®ä¸‹æ¯è¡Œæœ€å°å‰©ä½™é•¿åº¦ä¸‹çš„é—´éš™åˆ†é…');
+            ints_temp = Minimum_clearance_distribution(N_bot_temp, min_fiber, B_fiber, ints_mat_bot_rem, min_edge);
+            ints_temp_save = [ints_temp_save;ints_temp];
+            
+            %è®¡ç®—åº•å±‚çº¤èŠ¯ä½ç½®çŸ©é˜µ
+            fiber_core_bot = Bottom_core_matrix(diam_mat_bot, L_fiber_bot_max, ints_temp, N_bot_temp);
+            
+            %è®¡ç®—åº•å±‚é—´éš™çŸ©é˜µ
+            ints_mat_bot = Bottom_clearance_matrix(N_samp, N_bot_temp, fiber_core_bot, diam_mat_bot, S_base);
+            ints_mat_bot_temp = ints_mat_bot;
+        else if jump_jump == 1
+                
+                %å¯¹åº•å±‚é—´éš™çŸ©é˜µæŒ‡å®šä¿®æ”¹
+                disp('é‡æ–°åˆ†é…åº•å±‚çº§é—´éš™çŸ©é˜µ');
+                ints_layer = ints_neg_save_v2(3) + T_base_left * ints_neg_save_v2(1);
+                if abs(ints_neg_save_v2(4)) < 0.01
+                    TM = 20;
+                else if abs(ints_neg_save_v2(4)) >= 0.01&&abs(ints_neg_save_v2(4)) < 0.1
+                        TM = 10;
+                    else if abs(ints_neg_save_v2(4)) >= 0.1&&abs(ints_neg_save_v2(4)) < 1
+                            TM = 5;
+                        else if abs(ints_neg_save_v2(4)) >= 1&&abs(ints_neg_save_v2(4)) < 10
+                                TM = 2;
+                            else if abs(ints_neg_save_v2(4)) >= 10
+                                    TM = 1.5;
+                                end
+                            end
+                        end
+                    end
+                end
+                ints_mat_bot_save(:,2:end - 1) = ints_mat_bot_save(:,2:end - 1) - abs(ints_neg_save_v2(4)*TM)/(size(ints_mat_bot_save,2) - 3);
+                ints_mat_bot_save(:,ints_layer) = ints_mat_bot_save(:,ints_layer) + abs(ints_neg_save_v2(4)*TM)...
+                    + abs(ints_neg_save_v2(4)*TM)/(size(ints_mat_bot_save,2) - 3);
+                if ints_mat_bot_save(:,ints_layer) < -1*E_fiber||ints_mat_bot_save(:,ints_layer) > (sqrt(3)-1)/2*R_fiber
+                    error('åº•å±‚çº§é—´éš™å‡ºç°ä¸¥é‡é”™è¯¯ï¼Œè¯·é‡æ–°é€‰æ‹©åº•å±‚çº§åŒæ•°æˆ–å…‰çº¤é‡‡æ ·ç‚¹ä½ç½®ï¼');
+                end
+                ints_mat_bot = ints_mat_bot_save;
+            end
+        end
         ints_mat{1,1} = ints_mat_bot;
         
-        %¿ªÊ¼ÍÆ²âÉÏ²ã¼¶¼äÏ¶¾ØÕó
-        disp('¿ªÊ¼ÍÆ²âÉÏ²ã¼¶¼äÏ¶¾ØÕó');
+        %å¼€å§‹æ¨æµ‹ä¸Šå±‚çº§é—´éš™çŸ©é˜µ
+        disp('å¼€å§‹æ¨æµ‹ä¸Šå±‚çº§é—´éš™çŸ©é˜µ');
         
-        delta_d_temp_layer_all=zeros(N_samp, N_bot);%µ×²ãÏËĞ¾¾à¹Ç¼Ü±íÃæ¾àÀë³õÊ¼¾ØÕó
+        delta_d_temp_layer_all=zeros(N_samp, N_bot);%åº•å±‚çº¤èŠ¯è·éª¨æ¶è¡¨é¢è·ç¦»åˆå§‹çŸ©é˜µ
         
-        coc_mat = {};%ÏËĞ¾¾à¹Ç¼Ü±íÃæ¾àÀë
-        R_mat = {};%¹âÏËÓĞĞ§Ö±¾¶¾ØÕó´æ´¢
+        coc_mat = {};%çº¤èŠ¯è·éª¨æ¶è¡¨é¢è·ç¦»
+        R_mat = {};%å…‰çº¤æœ‰æ•ˆç›´å¾„çŸ©é˜µå­˜å‚¨
         N_bot_all = 0;
         reconstructed_signal = 0;
         for i = 1:layer-2
             ints_unroll_t = [];
-            %×¢Òâ£ºÓÉÓÚ×îºóÒ»²ã¼¶¼¶ÊıÆæÅ¼ĞÔÎ´Öª£¬ËùÒÔĞèÒª·ÖÇé¿öÌÖÂÛ£¬Èô×îºóÒ»²ã¼¶ÎªÆæ£¬Æä²øÈÆ·½ÏòÓÉ×óÖÁÓÒ£¬¿É°´ÕÕµÍ²ã¼¶´¦Àí
-            N_bot_cal = N_bot_sat(i + 1);%µ±Ç°¼ÆËã¡¢Ô¤¼ÆµÄÏÂÒ»²ã¼¶ÔÑÊı
-            N_bot_now = N_bot_sat(i);%µ±Ç°²ã¼¶ÔÑÊı
+            
+            TBL = T_base_left;
+            TBR = T_base_right;
+            %æ³¨æ„ï¼šç”±äºæœ€åä¸€å±‚çº§çº§æ•°å¥‡å¶æ€§æœªçŸ¥ï¼Œæ‰€ä»¥éœ€è¦åˆ†æƒ…å†µè®¨è®ºï¼Œè‹¥æœ€åä¸€å±‚çº§ä¸ºå¥‡ï¼Œå…¶ç¼ ç»•æ–¹å‘ç”±å·¦è‡³å³ï¼Œå¯æŒ‰ç…§ä½å±‚çº§å¤„ç†
+            N_bot_cal = N_bot_sat(i + 1);%å½“å‰è®¡ç®—ã€é¢„è®¡çš„ä¸‹ä¸€å±‚çº§åŒæ•°
+            N_bot_now = N_bot_sat(i);%å½“å‰å±‚çº§åŒæ•°
             N_bot_all = N_bot_all + N_bot_now;
             
             
-            %ÓÉÓÚÏàÁÚÁ½²ã¼¶Ö®¼äÏà¶Ô¼õÉÙÒ»¶¨Á¿ÔÑÊı£¬ËùÒÔ¿ÉÒÔ²»¿¼ÂÇÇ°ºó¼¸ÔÑÎŞµş¼ÓµÄ¹âÏË
+            %ç”±äºç›¸é‚»ä¸¤å±‚çº§ä¹‹é—´ç›¸å¯¹å‡å°‘ä¸€å®šé‡åŒæ•°ï¼Œæ‰€ä»¥å¯ä»¥ä¸è€ƒè™‘å‰åå‡ åŒæ— å åŠ çš„å…‰çº¤
             ints_mat_last_temp = ints_mat{i,1};
             diam_mat_last_temp = diam_mat(:,(N_bot_all - N_bot_now + 1):N_bot_all);
+            
+            if mod(i, 2) == 0
+                diam_mat_last_temp = fliplr(diam_mat_last_temp);
+            end
+            
             
             if i == 1
                 delta_d_temp_all=zeros(N_samp, N_bot_sat(i));
@@ -240,136 +322,245 @@ for N_bot = N_bot_max_temp-round(N_bot_max_temp/100):N_bot_max_temp-round(N_bot_
             end
             
             diam_mat_next = diam_mat(:,(N_bot_all + 1):N_bot_all + N_bot_cal);
-            %ÏÂÃæ¿ªÊ¼ÅĞ¶Ïµ±Ç°¼ÆËãµÄÏÂÒ»²ã¼¶µÄµ±Ç°ÔÑÊıµÄºáÏòÖ±¾¶Ö®ºÍÊÇ·ñÂú×ã×¶ĞÎĞÎ×´
-            diam_mat_next_max = max(sum(diam_mat_next, 2) - N_bot_cal*R_fiber);
-            diam_mat_next_max_t = diam_mat_next_max;
-            k = 0;
-            disp(diam_mat_next_max);
-            while diam_mat_next_max_t > R_fiber/2
-                k = k + 1;
-                diam_mat_next_max_t = diam_mat_next_max - k*R_fiber;
-            end
             T_base_left_ex = 0;
             T_base_right_ex = 0;
-            if k ~= 0
-                reconstructed_signal = 1;%¶ÔÊ£Óà¹âÏË·¢³öÖØĞÂ¹¹½¨ĞÅºÅ£¬ÖØĞÂ¹¹½¨²ÉÑù¼ä¾àÒÔ¼°Ö±¾¶¾ØÕóµÈÊı¾İ
-                if mod(i, 2) == 1
-                    T_base_left_ex = k;
-                    diam_mat_next = diam_mat_next(:,(k + 1):end);
-                else
-                    T_base_right_ex = k;
-                    diam_mat_next = diam_mat_next(:,1:(end - k));
-                end
-                N_bot_sat((i + 1):end) = N_bot_sat((i + 1):end) - k;
-                N_bot_cal = N_bot_cal - k;
-            end
-            R_mat{i + 1, 1} = diam_mat_next;
             
-            %ÔÚ´Ë´¦¹²·ÖÈıÖÖÇé¿öÌÖÂÛ£º
-            %                     Ò»¡¢³ı×î¸ß²ã¼¶ÍâµÄÆäÓà²ã¼¶
-            %                     ¶ş¡¢×î¸ß²ã¼¶ÎªÆæÊı²ã
-            %                     Èı¡¢×î¸ß²ã¼¶ÎªÅ¼Êı²ã
-            %ÆäÖĞ£¬µÚÒ»ÓëµÚ¶şÖĞÇé¿öÔÚ¼ÆËã¼äÏ¶¾ØÕóÊ±£¬ÓÉÓÚ¶¼ÊÇ´Ó×óÈÆµ½ÓÒ£¬ËùÒÔ¿ÉÒÔÍ¬ÀàÌÖÂÛ
-            if i ~= layer-1 || mod(i,2) == 0
-                diam_mat_last = diam_mat_last_temp(:,(T_base_left + T_base_left_ex + 1):(T_base_left + T_base_left_ex + N_bot_cal + 1));
-            else if i == layer - 1&&mod(i,2) == 1%µ¥¶À¿¼ÂÇ×îºóÒ»²ãÎ´ÂúµÄÇÒ×îºó²ã¼¶ÎªÅ¼ÊıµÄ¹âÏË²ã¼¶
-                    diam_mat_last = diam_mat_last_temp(:,((end - (T_base_right + T_base_right_ex) - N_bot_cal)...
-                        :(end - (T_base_right + T_base_right_ex))));
-                end
+            if mod(i, 2) == 1
+               diam_mat_next = fliplr(diam_mat_next);
             end
             
-            %ÖØ×é²ã¼¶¼äÏ¶¾ØÕó
-            ints_mat_last = Recombine_hierarchy_clearance_matrix_updata(i, layer,...
-                ints_mat_last_temp, T_base_left, T_base_left_ex, T_base_right, T_base_right_ex, N_bot_cal, diam_mat_last_temp);
-            
-            %°´ÕÕÃ¿²ã¼¶¼äÏ¶¾ØÕóÃ¿ĞĞ·Ö±ğ½øĞĞ´¦Àí
-            for m = 1:N_samp
+            yes = 0;
+            while yes == 0
+                
+                %åœ¨æ­¤å¤„å…±åˆ†ä¸‰ç§æƒ…å†µè®¨è®ºï¼š
+                %                     ä¸€ã€é™¤æœ€é«˜å±‚çº§å¤–çš„å…¶ä½™å±‚çº§
+                %                     äºŒã€æœ€é«˜å±‚çº§ä¸ºå¥‡æ•°å±‚
+                %                     ä¸‰ã€æœ€é«˜å±‚çº§ä¸ºå¶æ•°å±‚
+                %å…¶ä¸­ï¼Œç¬¬ä¸€ä¸ç¬¬äºŒä¸­æƒ…å†µåœ¨è®¡ç®—é—´éš™çŸ©é˜µæ—¶ï¼Œç”±äºéƒ½æ˜¯ä»å·¦ç»•åˆ°å³ï¼Œæ‰€ä»¥å¯ä»¥åŒç±»è®¨è®º
                 if i ~= layer-1 || mod(i,2) == 0
-                    delta_d_temp = (delta_d_temp_all(m,(T_base_left + T_base_left_ex + 1)...
-                        :(T_base_left + T_base_left_ex + N_bot_cal + 1)))';
-                else if i == layer - 1&&mod(i,2) == 1
-                        delta_d_temp = (delta_d_temp_all(m,((end - T_base_right + T_base_right_ex - N_bot_cal)...
-                            :(end - T_base_right + T_base_right_ex))))';
+                    diam_mat_last = diam_mat_last_temp(:,(T_base_left + T_base_left_ex + 1):...
+                        (T_base_left + T_base_left_ex + N_bot_cal + 1));
+                else if i == layer - 1&&mod(i,2) == 1%å•ç‹¬è€ƒè™‘æœ€åä¸€å±‚æœªæ»¡çš„ä¸”æœ€åå±‚çº§ä¸ºå¶æ•°çš„å…‰çº¤å±‚çº§
+                        diam_mat_last = diam_mat_last_temp(:,((end - (T_base_right + T_base_right_ex) - N_bot_cal)...
+                            :(end - (T_base_right + T_base_right_ex))));
                     end
                 end
-                ints_temp = ints_mat_last(m,:);%»ñÈ¡µÍ²ã¼¶mĞĞ¼äÏ¶¾ØÕó
-                data_unroll_temp_1 = diam_mat_last(m,:);%»ñÈ¡µÍ²ã¼¶mĞĞÖ±¾¶¾ØÕó
-                data_unroll_temp_2 = diam_mat_next(m,:);%»ñÈ¡¸ß²ã¼¶mĞĞÖ±¾¶¾ØÕó
-                ints_unroll_temp = [];
-                ints_unroll_temp_2 = 0;
                 
-                %×¢Òâ£ºÃ¿´ÎÍÆËãÏÂÒ»´Î¼äÏ¶ÓÉÁ½µÍ²ã¼¶¹âÏË£¨A\B£©ºÍÒ»¸ß²ã¼¶¹âÏË£¨C£©×é³É£¬ÏËĞ¾Á¬½ÓºóÎªÈı½ÇĞÎ£¬ÔòÓÉÈı½ÇĞÎ¹«Ê½½øĞĞ¼ÆËã
+                %é‡ç»„å±‚çº§é—´éš™çŸ©é˜µ
+                ints_mat_last = Recombine_hierarchy_clearance_matrix_updata(i, layer,...
+                    ints_mat_last_temp, T_base_left, T_base_left_ex, T_base_right, T_base_right_ex, N_bot_cal, diam_mat_last_temp);
                 
-                for j = 1:N_bot_cal%Ã¿ÔÑÃ¿ÔÑµÄÍÆ²âÏÂÒ»¼¶µÄµ¥¸ö¼äÏ¶¿í¶È
-                    %»ñÈ¡ÈıÄ¿±ê¹âÏË×ó¹âÏË¾à¹âÏË»·¹Ç¼Üµ×²¿¾àÀë
-                    if j ~= 1
-                        ints_1 = sum(ints_temp(1:j)) + sum(data_unroll_temp_1(1:j - 1));
-                    else
-                        ints_1 = sum(ints_temp(1:j));
+                %æŒ‰ç…§æ¯å±‚çº§é—´éš™çŸ©é˜µæ¯è¡Œåˆ†åˆ«è¿›è¡Œå¤„ç†
+                for m = 1:N_samp
+                    if i ~= layer-1 || mod(i,2) == 0
+                        delta_d_temp = (delta_d_temp_all(m,(T_base_left + T_base_left_ex + 1)...
+                            :(T_base_left + T_base_left_ex + N_bot_cal + 1)))';
+                    else if i == layer - 1&&mod(i,2) == 1
+                            delta_d_temp = (delta_d_temp_all(m,((end - T_base_right + T_base_right_ex - N_bot_cal)...
+                                :(end - T_base_right + T_base_right_ex))))';
+                        end
                     end
+                    ints_temp = ints_mat_last(m,:);%è·å–ä½å±‚çº§mè¡Œé—´éš™çŸ©é˜µ
+                    data_unroll_temp_1 = diam_mat_last(m,:);%è·å–ä½å±‚çº§mè¡Œç›´å¾„çŸ©é˜µ
+                    data_unroll_temp_2 = diam_mat_next(m,:);%è·å–é«˜å±‚çº§mè¡Œç›´å¾„çŸ©é˜µ
+                    ints_unroll_temp = [];
+                    ints_unroll_temp_2 = 0;
                     
-                    %»ñÈ¡ÈıÄ¿±ê¹âÏË×óÓÒÁ½¹âÏË¼ä¾à
-                    ints_2 = ints_temp(j+1);
+                    %æ³¨æ„ï¼šæ¯æ¬¡æ¨ç®—ä¸‹ä¸€æ¬¡é—´éš™ç”±ä¸¤ä½å±‚çº§å…‰çº¤ï¼ˆA\Bï¼‰å’Œä¸€é«˜å±‚çº§å…‰çº¤ï¼ˆCï¼‰ç»„æˆï¼Œçº¤èŠ¯è¿æ¥åä¸ºä¸‰è§’å½¢ï¼Œåˆ™ç”±ä¸‰è§’å½¢å…¬å¼è¿›è¡Œè®¡ç®—
                     
-                    %»ñÈ¡ÈıÄ¿±ê¹âÏË
-                    fog_r_unroll_1 = data_unroll_temp_1(j);
-                    fog_r_unroll_2 = data_unroll_temp_1(j+1);
-                    fog_r_unroll_3 = data_unroll_temp_2(j);
-                    
-                    a = (fog_r_unroll_3 + fog_r_unroll_1)/2;%A\C¹âÏËÏËĞ¾Ö±Ïß¾àÀë
-                    %dÎªA\BÁ½¹âÏËµÄÏËĞ¾¸ß¶È²î
-                    if i == 1
-                        d = (delta_d_temp(j,1) + fog_r_unroll_1 - delta_d_temp(j + 1,1) - fog_r_unroll_2)/2;
-                    else
-                        d = delta_d_temp(j,1) - delta_d_temp(j + 1,1);
+                    for j = 1:N_bot_cal%æ¯åŒæ¯åŒçš„æ¨æµ‹ä¸‹ä¸€çº§çš„å•ä¸ªé—´éš™å®½åº¦
+                        jump_jump = 0;
+                        %è·å–ä¸‰ç›®æ ‡å…‰çº¤å·¦å…‰çº¤è·å…‰çº¤ç¯éª¨æ¶åº•éƒ¨è·ç¦»
+                        if j ~= 1
+                            ints_1 = sum(ints_temp(1:j)) + sum(data_unroll_temp_1(1:j - 1));
+                        else
+                            ints_1 = sum(ints_temp(1:j));
+                        end
+                        
+                        %è·å–ä¸‰ç›®æ ‡å…‰çº¤å·¦å³ä¸¤å…‰çº¤é—´è·
+                        ints_2 = ints_temp(j+1);
+                        
+                        %è·å–ä¸‰ç›®æ ‡å…‰çº¤
+                        fog_r_unroll_1 = data_unroll_temp_1(j);
+                        fog_r_unroll_2 = data_unroll_temp_1(j+1);
+                        fog_r_unroll_3 = data_unroll_temp_2(j);
+                        
+                        a = (fog_r_unroll_3 + fog_r_unroll_1)/2;%A\Cå…‰çº¤çº¤èŠ¯ç›´çº¿è·ç¦»
+                        %dä¸ºA\Bä¸¤å…‰çº¤çš„çº¤èŠ¯é«˜åº¦å·®
+                        if i == 1
+                            d = (delta_d_temp(j,1) + fog_r_unroll_1 - delta_d_temp(j + 1,1) - fog_r_unroll_2)/2;
+                        else
+                            d = delta_d_temp(j,1) - delta_d_temp(j + 1,1);
+                        end
+                        b = sqrt(((fog_r_unroll_2 + fog_r_unroll_1)/2 + ints_2)^2 + d^2);%A\Bä¸¤å…‰çº¤çº¤èŠ¯è·ç¦»æ¨ªå‘åˆ†é‡
+                        c = (fog_r_unroll_3 + fog_r_unroll_2)/2;%B\Cå…‰çº¤çº¤èŠ¯ç›´çº¿è·ç¦»
+                        theta1 = rad2deg(acos((a^2 + b^2 - c^2)/(2*a*b)));%A\Cã€A\Bä¸¤æ¡è¿çº¿æ„æˆçš„è§’åº¦
+                        theta2 = rad2deg(asin(d/b));%A\Bè¿çº¿æ„æˆçš„ä¸æ¨ªè½´çš„è§’åº¦
+                        theta = theta1-theta2;%A\Cè¿çº¿æ„æˆçš„ä¸æ¨ªè½´çš„è§’åº¦
+                        delta_d = a*cosd(theta);%A\Cä¸¤å…‰çº¤çº¤èŠ¯è¿çº¿è·ç¦»åœ¨æ¨ªå‘ä¸Šçš„åˆ†é‡
+                        if i == 1
+                            delta_d_temp(j,1) = delta_d_temp(j,1) + a*sind(theta) + fog_r_unroll_1/2;
+                        else
+                            delta_d_temp(j,1) = delta_d_temp(j,1) + a*sind(theta);%é«˜å±‚çº§çº¤èŠ¯è·éª¨æ¶è¡¨é¢è·ç¦»
+                        end
+                        %è®¡ç®—é—´éš™
+                        ints_unroll_temp_1 = ints_1+fog_r_unroll_1/2 + delta_d - fog_r_unroll_3/2 - ints_unroll_temp_2;
+                        
+                        if re_read == 0
+                            if ints_unroll_temp_1 < 0
+                                ints_neg_save = [ints_neg_save;[i + 1, m, j, ints_unroll_temp_1]];
+                            end
+                        end
+                        
+                        if j~=1
+                            if re_read == 0
+                                if ints_unroll_temp_1 < -1*E_fiber||ints_unroll_temp_1 > (sqrt(3)-1)/2*R_fiber
+                                    ints_neg_save_v2 = [i, m, j, ints_unroll_temp_1];
+                                    ints_mat_bot_save = ints_mat_bot;
+                                    jump_jump = 1;
+                                    disp('é—´éš™æœªèƒ½æ»¡è¶³æœ€å°è¦æ±‚ï¼');
+                                    break%åˆ¤æ–­è¯¥é—´éš™å®½åº¦æ˜¯å¦æ»¡è¶³é—´éš™åˆ¤æ–­åŸºå‡†ï¼Œä¸æ»¡è¶³ç›´æ¥ç»“æŸï¼Œé‡æ–°è®¡ç®—
+                                end
+                            else
+                                if ints_unroll_temp_1 < -1*E_fiber||ints_unroll_temp_1 > (sqrt(3)-1)/2*R_fiber
+                                    jump_jump = 1;
+                                    disp('é—´éš™æœªèƒ½æ»¡è¶³æœ€å°è¦æ±‚ï¼');
+                                    break%åˆ¤æ–­è¯¥é—´éš™å®½åº¦æ˜¯å¦æ»¡è¶³é—´éš™åˆ¤æ–­åŸºå‡†ï¼Œä¸æ»¡è¶³ç›´æ¥ç»“æŸï¼Œé‡æ–°è®¡ç®—
+                                end
+                            end
+                        end
+                        ints_unroll_temp = [ints_unroll_temp;ints_unroll_temp_1];%å­˜å‚¨é«˜å±‚çº§é—´éš™çŸ©é˜µ
+                        %è·å–é«˜å±‚çº§å…‰çº¤å³è¾¹è·éª¨æ¶åº•è¾¹è·ç¦»
+                        ints_unroll_temp_2 = sum(ints_unroll_temp) + sum(data_unroll_temp_2(1:j));
                     end
-                    b = sqrt(((fog_r_unroll_2 + fog_r_unroll_1)/2 + ints_2)^2 + d^2);%A\BÁ½¹âÏËÏËĞ¾¾àÀëºáÏò·ÖÁ¿
-                    c = (fog_r_unroll_3 + fog_r_unroll_2)/2;%B\C¹âÏËÏËĞ¾Ö±Ïß¾àÀë
-                    theta1 = rad2deg(acos((a^2 + b^2 - c^2)/(2*a*b)));%A\C¡¢A\BÁ½ÌõÁ¬Ïß¹¹³ÉµÄ½Ç¶È
-                    theta2 = rad2deg(asin(d/b));%A\BÁ¬Ïß¹¹³ÉµÄÓëºáÖáµÄ½Ç¶È
-                    theta = theta1-theta2;%A\CÁ¬Ïß¹¹³ÉµÄÓëºáÖáµÄ½Ç¶È
-                    delta_d = a*cosd(theta);%A\CÁ½¹âÏËÏËĞ¾Á¬Ïß¾àÀëÔÚºáÏòÉÏµÄ·ÖÁ¿
-                    if i == 1
-                        delta_d_temp(j,1) = delta_d_temp(j,1) + a*sind(theta) + fog_r_unroll_1/2;
-                    else
-                        delta_d_temp(j,1) = delta_d_temp(j,1) + a*sind(theta);%¸ß²ã¼¶ÏËĞ¾¾à¹Ç¼Ü±íÃæ¾àÀë
+                    if jump_jump == 1
+                        break%è·³å‡º
                     end
-                    %¼ÆËã¼äÏ¶
-                    ints_unroll_temp_1 = ints_1+fog_r_unroll_1/2 + delta_d - fog_r_unroll_3/2 - ints_unroll_temp_2;
-                    if ints_unroll_temp_1 < -1*E_fiber
-                        break%ÅĞ¶Ï¸Ã¼äÏ¶¿í¶ÈÊÇ·ñÂú×ã¼äÏ¶ÅĞ¶Ï»ù×¼£¬²»Âú×ãÖ±½Ó½áÊø£¬ÖØĞÂ¼ÆËã
-                        disp('¼äÏ¶Î´ÄÜÂú×ã×îĞ¡ÒªÇó£¡');
-                    end
-                    ints_unroll_temp = [ints_unroll_temp;ints_unroll_temp_1];%´æ´¢¸ß²ã¼¶¼äÏ¶¾ØÕó
-                    %»ñÈ¡¸ß²ã¼¶¹âÏËÓÒ±ß¾à¹Ç¼Üµ×±ß¾àÀë
-                    ints_unroll_temp_2 = sum(ints_unroll_temp) + sum(data_unroll_temp_2(1:j));
+                    delta_d_temp_all(m,1:N_bot_cal) = (delta_d_temp(1:N_bot_cal))';
+                    ints_unroll_temp_1_last = S_base - sum(ints_unroll_temp) - sum(data_unroll_temp_2);%è®¡ç®—æœ€åå…‰çº¤è·éª¨æ¶åº•éƒ¨è·ç¦»
+                    ints_unroll_temp = [ints_unroll_temp;ints_unroll_temp_1_last];
+                    ints_unroll_t = [ints_unroll_t;ints_unroll_temp'];%æ»¡è¶³åŸºå‡†åï¼Œå°†è¯¥è¡Œé—´éš™æ•°æ®å­˜å‚¨
                 end
-                if ints_unroll_temp_1 < -1*E_fiber
-                    break%Ìø³ö
+                if jump_jump == 1
+                    disp(['é”™è¯¯å±‚çº§ï¼š', num2str(i)]);
+                    disp(['æŠ¥é”™é—´éš™ï¼š', num2str(ints_unroll_temp_1)]);
+                    disp(['æŠ¥é”™åŒæ•°ï¼š', num2str(j)]);
+                    error_level=[error_level,i];
+                    %tabulate(error_level);
+                    break%è·³å‡º
                 end
-                delta_d_temp_all(m,1:N_bot_cal) = (delta_d_temp(1:N_bot_cal))';
-                ints_unroll_temp_1_last = S_base - sum(ints_unroll_temp) - sum(data_unroll_temp_2);%¼ÆËã×îºó¹âÏË¾à¹Ç¼Üµ×²¿¾àÀë
-                ints_unroll_temp = [ints_unroll_temp;ints_unroll_temp_1_last];
-                ints_unroll_t = [ints_unroll_t;ints_unroll_temp'];%Âú×ã»ù×¼ºó£¬½«¸ÃĞĞ¼äÏ¶Êı¾İ´æ´¢
+                if i == 1
+                    coc_mat{i,1} = (R_mat{i,1})/2;
+                end
+                delta_d_temp_all = delta_d_temp_all(:,1:N_bot_cal);
+                
+                %ä¸‹é¢å¼€å§‹åˆ¤æ–­å½“å‰è®¡ç®—çš„ä¸‹ä¸€å±‚çº§çš„å½“å‰åŒæ•°çš„æ¨ªå‘ç›´å¾„ä¹‹å’Œæ˜¯å¦æ»¡è¶³é”¥å½¢å½¢çŠ¶
+                ints_unroll_t_1 = ints_mat{i, 1};
+                diam_mat_next_1 = R_mat{i, 1};
+                diam_mat_next_max = sum(diam_mat_next, 2) + sum(ints_unroll_t(:,2:end-1), 2)...
+                    - sum(diam_mat_next_1, 2) - sum(ints_unroll_t_1(:,2:end-1), 2);
+                diam_mat_next_max_t = max(diam_mat_next_max);
+                
+                diam_mat_next_left = diam_mat_next_1(:, 1)./2;
+                diam_mat_next_right = diam_mat_next_1(:, end)./2;
+                
+                diam_mat_next_left_1 = diam_mat_next_1(:, T_base_left + 1)./2 + ints_unroll_t_1(:, T_base_left + 2)./2;
+                diam_mat_next_right_1 = diam_mat_next_1(:, end-T_base_right )./2 + ints_unroll_t_1(:, end - T_base_right - 1)./2;
+                
+                if min(diam_mat_next_left) > 1.25*max(diam_mat_next_left_1)
+                    k_left = 1;
+                else if max(diam_mat_next_left) < 0.75*min(diam_mat_next_left_1)
+                        k_left = -1;
+                    else
+                        k_left = 0;
+                    end
+                end
+                if min(diam_mat_next_right) > 1.25*min(diam_mat_next_right_1)
+                    k_right = 1;
+                else if max(diam_mat_next_right) < 0.75*min(diam_mat_next_right_1)
+                        k_right = -1;
+                    else
+                        k_right = 0;
+                    end
+                end
+                k = k_left + k_right;
+                %while diam_mat_next_max_t < R_fiber*(T_base_right + T_base_left + 1)
+                %    k = k + 1;
+                %    diam_mat_next_max_t = diam_mat_next_max_t + k*R_fiber;
+                %end
+                if k ~= 0
+                    disp(k);
+                    reconstructed_signal = 1;%å¯¹å‰©ä½™å…‰çº¤å‘å‡ºé‡æ–°æ„å»ºä¿¡å·ï¼Œé‡æ–°æ„å»ºé‡‡æ ·é—´è·ä»¥åŠç›´å¾„çŸ©é˜µç­‰æ•°æ®
+                    %if mod(i, 2) == 1
+                    %    T_base_left_ex = k;
+                    %    diam_mat_next = diam_mat_next(:,(k + 1):end);
+                    %else
+                    %    T_base_right_ex = k;
+                    %    diam_mat_next = diam_mat_next(:,1:(end - k));
+                    %end
+                    
+                    if k_left == 1 && k_right ~= -1
+                        T_base_left_ex = k_left;
+                        diam_mat_next = diam_mat_next(:,(k_left + 1):end);
+                    else if k_left == 1 && k_right == -1
+                            T_base_left_ex = k_left;
+                            T_base_right_ex = k_right;
+                        end
+                    end
+                    if k_right == 1 && k_left ~= -1
+                        T_base_right_ex = k_right;
+                        diam_mat_next = diam_mat_next(:,1:(end - k_right));
+                    else if k_right == 1 && k_left == -1
+                            T_base_left_ex = k_left;
+                            T_base_right_ex = k_right;
+                        end
+                    end
+                    if  k_right == -1 && k_left ~= 1
+                        T_base_left_ex = k_left;
+                        T_base_right_ex = k_right;
+                        diam_mat_next = diam_mat(:,(N_bot_all + 1):N_bot_all + N_bot_cal - k);
+                        if mod(i, 2) == 1
+                            diam_mat_next = fliplr(diam_mat_next);
+                        end
+                    end
+                    if  k_right ~= 1 && k_left == -1
+                        T_base_left_ex = k_left;
+                        T_base_right_ex = k_right;
+                        diam_mat_next = diam_mat(:,(N_bot_all + 1):N_bot_all + N_bot_cal - k);
+                        if mod(i, 2) == 1
+                            diam_mat_next = fliplr(diam_mat_next);
+                        end
+                    end
+                    TBL = TBL + T_base_left_ex;
+                    TBR = TBR + T_base_right_ex;
+                    if TBL < 0 || TBR < 0
+                        disp('å½“å‰è¾“å…¥å‚æ•°æ— è§£ï¼');
+                        error('ç»ˆæ­¢è¿è¡Œï¼');
+                    end
+                    delta_d_temp_all = coc_mat{i,1};
+                    ints_unroll_t = [];
+                    N_bot_sat((i + 1):end) = N_bot_sat((i + 1):end) - k;
+                    N_bot_cal = N_bot_cal - k;
+                    if (N_bot_cal + T_base_left + T_base_right + 1) >  N_bot_sat(i)
+                        disp('è®¡ç®—é”™è¯¯ï¼Œè°ƒæ•´åº•å±‚åŒæ•°é‡æ–°è®¡ç®—ï¼');
+                        jump_jump = 2;
+                        break;
+                    end
+                else
+                    yes = 1;
+                    coc_mat{i + 1,1}=delta_d_temp_all;%å­˜å‚¨çº¤èŠ¯è·éª¨æ¶è¡¨é¢è·ç¦»
+                    R_mat{i + 1, 1} = diam_mat_next;
+                    ints_mat{i + 1,1} = ints_unroll_t;%å­˜å‚¨é—´éš™çŸ©é˜µ
+                end
             end
-            if ints_unroll_temp_1 < -1*E_fiber
-                disp(['´íÎó²ã¼¶£º', num2str(i)]);
-                disp(['±¨´í¼äÏ¶£º', num2str(ints_unroll_temp_1)]);
-                disp(['±¨´íÔÑÊı£º', num2str(j)]);
-                error_level=[error_level,i];
-                %tabulate(error_level);
-                break%Ìø³ö
+            
+            if jump_jump >= 1
+                break%è·³å‡º
             end
-            ints_mat{i + 1,1} = ints_unroll_t;%´æ´¢¼äÏ¶¾ØÕó
-            if i == 1
-                coc_mat{i,1} = (R_mat{i,1})/2;
-            end
-            delta_d_temp_all = delta_d_temp_all(:,1:N_bot_cal);
-            coc_mat{i + 1,1}=delta_d_temp_all;%´æ´¢ÏËĞ¾¾à¹Ç¼Ü±íÃæ¾àÀë
             
             if reconstructed_signal == 1
                 disp('Data Reconstructed ?');
-                turns = sum(N_bot_sat(1:(i + 1)));%·¢³öÖØ¹¹ĞÅºÅºóÒÑÓÃ¹âÏË³¤¶È
+                turns = sum(N_bot_sat(1:(i + 1)));%å‘å‡ºé‡æ„ä¿¡å·åå·²ç”¨å…‰çº¤é•¿åº¦
                 samp_pos = samp_pos(1:turns*N_samp+1);
                 samp_pos_temp = samp_pos_temp(1:turns+1);
                 reconstructed_sg = i + 1;
@@ -379,8 +570,35 @@ for N_bot = N_bot_max_temp-round(N_bot_max_temp/100):N_bot_max_temp-round(N_bot_
             end
             
         end
-        if i == layer - 2
-            sat = 1;%µ±ÍÆ²âÍêËùÓĞ²ã¼¶ºó£¬¸ü»»satÆÀÅĞ²ÎÊıÖÕÖ¹ÍÆ²â
+        if i == layer - 2&&jump_jump ~= 1
+            disp('æ¨¡å‹å·²æ±‚è§£ï¼');
+            file_name = datestr(now,30);
+            file_name_coc = strcat(file_name,'_COC.mat');
+            file_name_R = strcat(file_name,'_R.mat');
+            file_name_diam = strcat('last','_diam.mat');
+            file_name_ints = strcat(file_name,'_ints.mat');
+            file_name_ints_bot = strcat(file_name,'_ints_last_o.mat');
+            if re_read == 0
+                file_name_ints_neg_save = strcat(file_name,'_ints_neg_save.mat');
+                save(file_name_ints_neg_save,'ints_neg_save');
+            end
+            save(file_name_coc,'coc_mat');
+            save(file_name_R,'R_mat');
+            save(file_name_ints,'ints_mat');
+            save(file_name_ints_bot,'ints_mat_bot_temp');
+            %ä¿å­˜å½“å‰ç”Ÿæˆçš„å…‰çº¤ç›´å¾„çŸ©é˜µæ•°æ®ï¼Œåç»­å¯å†æ¬¡è¯»å–è¯¥ç›´å¾„çŸ©é˜µ
+            save(file_name_diam,'diam_mat');
+            sat = 1;%å½“æ¨æµ‹å®Œæ‰€æœ‰å±‚çº§åï¼Œæ›´æ¢satè¯„åˆ¤å‚æ•°ç»ˆæ­¢æ¨æµ‹
+        end
+        if jump_jump == 2
+            break
         end
     end
+    if stop_num == 1
+        disp('å·²è§£ç®—ä¸€æ¬¡ï¼Œç»ˆæ­¢è¿è¡Œï¼');
+        break;
+    else
+        disp('å¼€å§‹ä¸‹ä¸€è½®è§£ç®—ï¼');
+    end
 end
+disp('æ¨¡å‹å·²åœæ­¢è¿è¡Œï¼');
